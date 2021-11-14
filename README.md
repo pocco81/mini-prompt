@@ -53,7 +53,7 @@ MiniPrompt can be configured from a `conf.toml` file located under `${XDG_CONFIG
 
 Here is the [default config](https://github.com/Pocco81/MiniPrompt/blob/main/config/conf.toml):
 
-```sh
+```toml
 # MiniPrompt's config file
 [behaviour]
 colored_exit_status = true			# prettify the exit status of the previous command
