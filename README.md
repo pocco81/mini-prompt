@@ -39,7 +39,38 @@ under dev
 
 ### 🔧 Setup
 
-under dev
+MiniPrompt can be configured from a `conf.toml` file located under `${XDG_CONFIG_HOME}/miniprompt/conf.toml` (note: if the `$XDG_CONFIG_HOME` env var is not set then it'll be assumed to be `$HOME/.config/`). If the file does not exist the settings will be assumed.
+
+Here is the default config:
+```
+# MiniPrompt's config file
+[behaviour]
+colored_exit_status = true
+dirtrim = 2
+enhanced_autocompletion = true
+enhanced_history_format = true
+dircolors = true
+
+[primary_prompt]
+prefix = "\[\e]0;\w\a\]"
+ps_content = "</yellow>\w</nc></spc>"
+succeeded = "green"
+failed = "red"
+
+[extensions]
+ext_git = false
+git_color = "cyan"
+ext_ssh = false
+ssh_color = "cyan"
+ext_kubernetes = false
+kubernetes_color = "cyan"
+
+[symbols]
+normal_mark = "➜"
+error = "✗"
+git_branch = ""
+kube = ""
+```
 
 ### 🌿 Utilization
 
@@ -47,8 +78,8 @@ under dev
 
 ## 🙋 FAQ
 
--   Q: **_"something?"_**
--   A: something
+-   Q: **_"if I don't have a config file, will MiniPrompt create one for me?"_**
+-   A: No, settings will simply be assumed from default values.
 
 # 📜 License
 
@@ -65,11 +96,12 @@ For more convoluted language, see the [LICENSE file](https://github.com/Pocco81/
 
 **High Priority:**
 
--   None
+-   Publish to NPM
+- Publish AUR
 
 **Low Priority:**
 
--   None
+-   Finish README
 
 <hr>
 <p align="center">
