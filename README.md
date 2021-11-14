@@ -5,11 +5,6 @@
 <p align="center">Minimal and versatile bash prompt</p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Pocco81/MiniPrompt/dev/assets/palette/morning_palette.png" width="175" />
-  <img src="https://raw.githubusercontent.com/Pocco81/MiniPrompt/dev/assets/palette/night_palette.png" width="175" />
-</p>
-
-<p align="center">
     <a href="https://github.com/Pocco81/MiniPrompt/stargazers"><img src="https://img.shields.io/github/stars/Pocco81/MiniPrompt?colorA=221e2f&colorB=b9c4e3&style=for-the-badge&logo=starship style=flat-square"></a>
     <a href="https://github.com/Pocco81/MiniPrompt/releases/latest"><img src="https://img.shields.io/github/release/Pocco81/MiniPrompt.svg?&style=for-the-badge&label=Release&logo=github&logoColor=eceff4&colorA=221e2f&colorB=f6bbe7"/></a>
     <a href="https://github.com/Pocco81/MiniPrompt/issues"><img src="https://img.shields.io/github/issues/Pocco81/MiniPrompt?colorA=221e2f&colorB=e7a988&style=for-the-badge"></a>
