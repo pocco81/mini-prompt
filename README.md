@@ -14,13 +14,12 @@
     <a href="https://github.com/Pocco81/MiniPrompt/releases/latest"><img src="https://img.shields.io/github/release/Pocco81/MiniPrompt.svg?&style=for-the-badge&label=Release&logo=github&logoColor=eceff4&colorA=221e2f&colorB=f6bbe7"/></a>
     <a href="https://github.com/Pocco81/MiniPrompt/issues"><img src="https://img.shields.io/github/issues/Pocco81/MiniPrompt?colorA=221e2f&colorB=e7a988&style=for-the-badge"></a>
     <a href="https://github.com/Pocco81/MiniPrompt/network/members"><img src="https://img.shields.io/github/forks/Pocco81/MiniPrompt?colorA=221e2f&colorB=f0a8e4&style=for-the-badge&logo=github"></a>
-    <a href="https://discord.gg/z6bwQpGp"><img src="https://img.shields.io/discord/869557815780470834?colorA=221e2f&colorB=ae9ad6&label=Discord&logo=discord&logoColor=white&style=for-the-badge"></a>
 </p>
 
 ## About
 
 <div style="text-align: justify">
-MiniPrompt is a minimal Bash prompt that aims to be as lightweight as possible while still being feature rich enough and user friendly to appeal to most users.
+MiniPrompt is a minimal Bash prompt that aims to be as lightweight as possible while still being feature rich and user friendly enough to appeal to most users.
 </div>
 
 ## 🎁 Features
