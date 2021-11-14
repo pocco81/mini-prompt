@@ -31,7 +31,18 @@ declare -A colors=(
 script_help=$(
     cat <<EOF
 
-MiniPrompt is a minimal and versatile prompt suitable for any type of machine. You can also use this script to toggle extensions on and off 'on the fly'!
+MiniPrompt is a minimal and versatile prompt suitable for any type of machine.
+You can also use it to toggle extensions on and off 'on the fly'!
+
+Args:
+	gt, git							handle the git extension
+	sh, ssh							handle the ssh extension
+	kb, kube, kubernetes			handle the kubernetes extensions
+
+Modifiers for the args:
+	t, toggle						Toggle extension on and off
+	e, enable						Enable extension
+	d, disable						Disable extension
 
 Flags:
     -h,--help                                   See this help message.
