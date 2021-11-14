@@ -104,7 +104,7 @@ $ mp git enable
 
 ## 🙋 FAQ
 
--   Q: **_"if I don't have a config file, will MiniPrompt create one for me?"_**
+-   Q: **_"If I don't have a config file, will MiniPrompt create one for me?"_**
 -   A: No, settings will simply be assumed from default values.
 
 -   Q: **_"Why does the alias created for the prompt needs to be sourced?"_**
