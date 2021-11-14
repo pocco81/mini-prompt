@@ -35,46 +35,72 @@ MiniPrompt is a minimal Bash prompt that aims to be as lightweight as possible w
 
 ### 📦 Installation
 
+#### NPM
+
 under dev
+
+#### AUR
+
+under dev
+
+#### Manual
+
+Copy [the prompt](https://github.com/Pocco81/MiniPrompt/blob/main/miniprompt) under `/usr/local/bin/` and give it execution permission.
 
 ### 🔧 Setup
 
 MiniPrompt can be configured from a `conf.toml` file located under `${XDG_CONFIG_HOME}/miniprompt/conf.toml` (note: if the `$XDG_CONFIG_HOME` env var is not set then it'll be assumed to be `$HOME/.config/`). If the file does not exist the settings will be assumed.
 
-Here is the default config:
-```
+Here is the [default config](https://github.com/Pocco81/MiniPrompt/blob/main/config/conf.toml):
+
+```sh
 # MiniPrompt's config file
 [behaviour]
-colored_exit_status = true
-dirtrim = 2
-enhanced_autocompletion = true
-enhanced_history_format = true
-dircolors = true
+colored_exit_status = true			# prettify the exit status of the previous command
+dirtrim = 2			# trim the CWD to only show x number of dirs
+enhanced_autocompletion = true			# completion maps, tilde expansion, mark directories, ...
+enhanced_history_format = true			# better format for your shell history: [%Y-%m-%d %T]
+dircolors = true			# color directories
 
 [primary_prompt]
-prefix = "\[\e]0;\w\a\]"
-ps_content = "</yellow>\w</nc></spc>"
-succeeded = "green"
-failed = "red"
+prefix = "\[\e]0;\w\a\]"			# prompt prefix
+ps_content = "</yellow>\w</nc></spc>"			# the actual content of your prompt
+normal_symbol = "➜"			# symbol to use after the previous command succeeded
+error_symbol = "✗"			# symbol to use after the previous command failed
+succeeded = "green"			# $normal_mark's color after a command executed successfully
+failed = "red"			# $error_mark's color after the previous command executed successfully
 
 [extensions]
-ext_git = false
-git_color = "cyan"
-ext_ssh = false
-ssh_color = "cyan"
-ext_kubernetes = false
-kubernetes_color = "cyan"
-
-[symbols]
-normal_mark = "➜"
-error = "✗"
-git_branch = ""
-kube = ""
+ext_git = false			# enable git extension (shows current working branch)
+ext_ssh = false			# enable ssh expansion (shows an @<machine> in the prompt)
+ext_kubernetes = false			# enable kubernetes extension (shows kubernetes' current context)
+git_color = "cyan"			# color of the git extension
+ssh_color = "cyan"			# color of the ssh extension
+kubernetes_color = "cyan"			# color of the kubernetes extennsion
+git_symbol = ""			# symbol to use for the git extension
+ssh_symbol = ""			# symbol to use for the ssh extension
+kube_symbol = ""			# symbol to use for the kubernetes extension
 ```
 
 ### 🌿 Utilization
 
-under dev
+#### Prompt
+
+To enable the prompt paste the following under your Bash rc (`$HOME/.bashrc`):
+
+```sh
+source /usr/local/bin/miniprompt
+alias mp="source /usr/local/bin/miniprompt"
+```
+
+#### On the fly commands
+
+On the previous step we created the alias `mp`, which we will be using to run commands for MiniPrompt. Use `mp --help` to see the available commands. Here is a quick example enabling the Git integration:
+
+```sh
+$ mp git enable
+# you can shorten it as: mp gt e
+```
 
 ## 🙋 FAQ
 
