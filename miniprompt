@@ -49,11 +49,6 @@ Flags:
 EOF
 )
 
-# usage
-# we have to source the script as an alias if we want to export environment variables: https://stackoverflow.com/questions/16618071/can-i-export-a-variable-to-the-environment-from-a-bash-script-without-sourcing-i
-# source /tmp/miniprompt/main
-# alias mnp="source /tmp/miniprompt/main"
-
 function load_defualt_settings() {
 	colored_exit_status="true"
 	dirtrim=2

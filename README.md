@@ -107,6 +107,9 @@ $ mp git enable
 -   Q: **_"if I don't have a config file, will MiniPrompt create one for me?"_**
 -   A: No, settings will simply be assumed from default values.
 
+-   Q: **_"Why does the alias created for the prompt needs to be sourced?"_**
+-   A: Because you can't export env vars from a shell script unless it's sourced, so [this](https://stackoverflow.com/questions/16618071/can-i-export-a-variable-to-the-environment-from-a-bash-script-without-sourcing-i) is the best solution.
+
 # 📜 License
 
 MiniPrompt is released under the GPL v3.0 license. It grants open-source permissions for users including:
