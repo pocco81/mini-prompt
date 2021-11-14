@@ -1,0 +1,27 @@
+# MiniPrompt's config file
+[behaviour]
+colored_exit_status = true
+dirtrim = 2
+enhanced_autocompletion = true
+enhanced_history_format = true
+dircolors = true
+
+[primary_prompt]
+prefix = "\[\e]0;\w\a\]"
+ps_content = "</yellow>\w</nc></spc>"
+succeeded = "green"
+failed = "red"
+
+[extensions]
+ext_git = false
+git_color = "cyan"
+ext_ssh = false
+ssh_color = "cyan"
+ext_kubernetes = false
+kubernetes_color = "cyan"
+
+[symbols]
+normal_mark = "➜"
+error = "✗"
+git_branch = ""
+kube = ""
