@@ -6,7 +6,6 @@
     "author": "Pocco81",
     "license": "GPL-3.0",
     "main": "miniprompt",
-    "bin": "./miniprompt",
     "scripts": {
         "install": "make install INSTALLATION_MEDIUM=npm",
         "test": "echo \"Error: no test specified\" && exit 1"
