@@ -12,7 +12,7 @@ INSTALLATION_MEDIUM=$2
 echo -e "${LOG_INFO} Analyzing..."
 
 if [[ "${INSTALLATION_MEDIUM}" == "npm" ]]; then
-	PREFIX="/usr/bin"
+	PREFIX="${CURDIR}"
 fi
 
 if [[ -f "${PREFIX}/miniprompt" ]]; then
