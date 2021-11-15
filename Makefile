@@ -36,3 +36,7 @@ run:
 	@echo -e "$(LOG_INFO) Running MiniPrompt...\n"
 	./miniprompt
 
+publish:
+	@echo -e "$(LOG_INFO) Publishing to NPM..."
+	@npm publish
+
