@@ -17,7 +17,7 @@ mkdir -p "${CONFIG_DIR}"
 if [[ ! "${INSTALLATION_MEDIUM}" == "npm" ]]; then
 	install "${CURDIR}/miniprompt" "${PREFIX}/miniprompt"
 else
-	PREFIX="/usr/bin"
+	PREFIX="${CURDIR}"
 fi
 echo -e "${LOG_INFO} Installing MiniPrompt under ${PREFIX}/..."
 echo -e "${LOG_INFO} Cloning default config under ${CONFIG_DIR}..."
