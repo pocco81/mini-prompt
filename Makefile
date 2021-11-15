@@ -9,12 +9,16 @@ LOG_WARNING=$(shell date +"%H:%M:%S") \e[0;33mWARNING\e[0m
 LOG_SUCCESS=$(shell date +"%H:%M:%S") \e[0;32mSUCCESS\e[0m
 
 .DEFAULT_GOAL := install
+INSTALLATION_MEDIUM=any
 
 install:
 	@echo -e "$(LOG_INFO) Preparing..."
-	@mkdir -p $(PREFIX)/bin $(CONFIG_DIR)
+	@mkdir -p $(CONFIG_DIR)
 	@echo -e "$(LOG_INFO) Installing MiniPrompt under $(PREFIX)/bin/..."
-	@install $(CURDIR)/miniprompt $(PREFIX)/bin/miniprompt
+	@if [[ ! "$(INSTALLATION_MEDIUM)" == "npm" ]]; then \
+		echo "ran"; \
+		install $(CURDIR)/miniprompt $(PREFIX)/bin/miniprompt; \
+	fi
 	@echo -e "$(LOG_INFO) Cloning default config under $(CONFIG_DIR)..."
 	@cp $(CURDIR)/config/conf.toml $(CONFIG_DIR)/conf.toml
 	@if ! grep -q $(PREFIX)/bin/miniprompt "$(BASHRC)"; then \
