@@ -13,6 +13,7 @@ INSTALLATION_MEDIUM=any
 
 install:
 	@./scripts/install.sh $(CURDIR) $(PREFIX) $(INSTALLATION_MEDIUM) $(BASHRC) $(CONFIG_DIR)
+	@cp "$(CURDIR)/config/conf.toml" "$(CONFIG_DIR)/conf.toml"
 
 uninstall:
 	@./scripts/uninstall.sh $(PREFIX) $(INSTALLATION_MEDIUM)
