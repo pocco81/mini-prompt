@@ -18,6 +18,8 @@ install:
 	@if [[ ! "$(INSTALLATION_MEDIUM)" == "npm" ]]; then \
 		echo "ran"; \
 		install $(CURDIR)/miniprompt $(PREFIX)/bin/miniprompt; \
+	else \
+		PREFIX=/usr; \
 	fi
 	@echo -e "$(LOG_INFO) Cloning default config under $(CONFIG_DIR)..."
 	@cp $(CURDIR)/config/conf.toml $(CONFIG_DIR)/conf.toml
