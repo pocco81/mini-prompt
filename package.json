@@ -1,0 +1,25 @@
+{
+  "name": "miniprompt",
+  "version": "0.1.0",
+  "description": "Minimal and versatile bash prompt",
+  "main": "miniprompt",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pocco81/MiniPrompt.git"
+  },
+  "keywords": [
+    "prompt",
+    "bash",
+    "simple",
+    "minimalism"
+  ],
+  "author": "Pocco81",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Pocco81/MiniPrompt/issues"
+  },
+  "homepage": "https://github.com/Pocco81/MiniPrompt#readme"
+}
