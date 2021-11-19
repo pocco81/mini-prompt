@@ -16,11 +16,12 @@ failed = "red"			# $error_mark's color after the previous command executed succe
 
 [extensions]
 ext_git = false			# enable git extension (shows current working branch)
-ext_ssh = false			# enable ssh expansion (shows an @<machine> in the prompt)
+ext_hostname = false			# enable hostname expansion (shows an @<machine> in the prompt)
 ext_kubernetes = false			# enable kubernetes extension (shows kubernetes' current context)
 git_color = "cyan"			# color of the git extension
-ssh_color = "cyan"			# color of the ssh extension
+hostname_color = "cyan"			# color of the hostname extension
 kubernetes_color = "cyan"			# color of the kubernetes extennsion
+git_struct = "</cyan> </unit>"
 git_symbol = ""			# symbol to use for the git extension
-ssh_symbol = ""			# symbol to use for the ssh extension
+hostname_symbol = ""			# symbol to use for the hostname extension
 kube_symbol = ""			# symbol to use for the kubernetes extension

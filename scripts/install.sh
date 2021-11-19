@@ -23,8 +23,8 @@ echo -e "${LOG_INFO} Installing MiniPrompt under ${PREFIX}/..."
 echo -e "${LOG_INFO} Cloning default config under ${CONFIG_DIR}..."
 cp "${CURDIR}/config/conf.toml" "${CONFIG_DIR}/conf.toml"
 if ! grep -q ${PREFIX}/miniprompt "${BASHRC}"; then \
-	echo -e "${LOG_WARNING} Appending sourcing command to your ${BASHRC}..."; \
-	echo -e "alias mp=\"source ${PREFIX}/miniprompt\"\nmp" >> "${BASHRC}"; \
+	echo -e "${LOG_WARNING} Appending sourcing command to your ${BASHRC}..."
+	echo -e "alias mp=\"source ${PREFIX}/miniprompt\"\nmp" >> "${BASHRC}"
 fi
 
 echo -e "${LOG_SUCCESS} You are all set, just reload your shell!"
