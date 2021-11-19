@@ -5,8 +5,8 @@
 # --> metadata
 config="$([ -z "${XDG_CONFIG_HOME}" ] && echo "${HOME}/.config" || echo "${XDG_CONFIG_HOME}")/miniprompt/conf.toml"
 
-# colors
-declare -A colors=(
+# clrs
+declare -A clrs=(
     ["spc"]=' '
     ["nc"]='\[\033[0m\]'
     ["gray"]='\[\033[0;30m\]'
@@ -50,33 +50,33 @@ EOF
 )
 
 function load_defualt_settings() {
-	colored_exit_status="true"
-	dirtrim=2
-	enhanced_autocompletion="true"
-	enhanced_history_format="true"
-	dircolors="true"
+    colored_exit_status="true"
+    dirtrim=2
+    enhanced_autocompletion="true"
+    enhanced_history_format="true"
+    dircolors="true"
 
-	prefix="\[\e]0;\w\a\]"
-	ps_content="</yellow>\w</nc></spc>"
-	normal_symbol="➜"
-	error_symbol="✗"
-	succeeded="green"
-	failed="red"
+    prefix="\[\e]0;\w\a\]"
+    ps_content="</yellow>\w</nc></spc>"
+    normal_symbol="➜"
+    error_symbol="✗"
+    succeeded="green"
+    failed="red"
 
-	ext_git="false"
-	ext_ssh="false"
-	ext_kubernetes="false"
-	git_color="cyan"
-	ssh_color="cyan"
-	kubernetes_color="cyan"
-	git_symbol=""
-	ssh_symbol=""
-	kube_symbol=""
+    ext_git="false"
+    ext_ssh="false"
+    ext_kubernetes="false"
+    git_color="cyan"
+    ssh_color="cyan"
+    kubernetes_color="cyan"
+    git_symbol=""
+    ssh_symbol=""
+    kube_symbol=""
 
 }
 
 function load_config() {
-	load_defualt_settings
+    load_defualt_settings
     [[ -f $1 ]] || {
         return 1
     }
@@ -139,11 +139,9 @@ function load_dircolors() {
 function reset_prompt() {
     PS1_previous_exit="$?"
     PS1_prefix="${prefix}" # window title
-    for color in "${!colors[@]}"; do
-        ps_content=${ps_content/"</${color}>"/"${colors[$color]}"}
-    done
+    for clr in "${!clrs[@]}"; do ps_content=${ps_content/"</${clr}>"/"${clrs[$clr]}"}; ps_suffix=${ps_suffix/"</${clr}>"/"${clrs[$clr]}"}; done
     PS1_content="${ps_content}"
-    PS1_suffix="${colors[$succeeded]}${normal_symbol}\[\033[0m\] "
+    PS1_suffix="${ps_suffix}${clrs[$normal_color]}"
 }
 
 function clean_variables() {
@@ -160,17 +158,15 @@ function assert_extension() {
     if [[ "$enabled" == "true" ]]; then
         bin_cmd="$(command -v ${name})"
         if [[ ! -z "$bin_cmd" ]]; then
+			unit="[empty_${name}]"
             case "$name" in
             "git")
                 if [[ "$($bin_cmd rev-parse --is-inside-work-tree 2>/dev/null)" = 'true' ]]; then
-                    PS1_content="${PS1_content:-}${colors[$git_color]}(${git_symbol} $($bin_cmd branch --show-current))\[\033[0m\] "
+					unit=$($bin_cmd branch --show-current)
                 fi
                 ;;
             "ssh")
-                if [[ -n "$SSH_CONNECTION" ]]; then
-                    PS1_prefix="\[\e]0;\u@\h \w\a\]"
-                    PS1_content="\[\e[2m\]\u@\h\[\e[0m\] ${PS1_content}"
-                fi
+					unit="\h"
                 ;;
             "kube")
                 local context
@@ -180,10 +176,14 @@ function assert_extension() {
                 PS1_content="${PS1_content:-} ${kube_symbol}\[\e[34m\]${context}${namespace:+:$namespace}\[\e[0m\]"
                 ;;
             esac
+
+			val="${name}_struct"
+			parsed_struct="${!val}"
+			for clr in "${!clrs[@]}"; do parsed_struct=${parsed_struct/"</${clr}>"/"${clrs[$clr]}"}; done
+            PS1_content="${PS1_content:-}${parsed_struct/"</unit>"/"${unit}"}${clrs[$normal_color]}"
         fi
     fi
 }
-
 
 function turn_ext() {
     task=$1
@@ -233,7 +233,7 @@ function make_prompt() {
     reset_prompt
 
     if [[ "$colored_exit_status" == "true" ]]; then
-        [ "$PS1_previous_exit" -ne 0 ] && PS1_suffix="${colors[$failed]}${error_symbol} \[\e[m\]"
+        [ "$PS1_previous_exit" -ne 0 ] && PS1_suffix="${clrs[$failed]}${error_symbol} ${clrs[$normal_color]}"
     fi
 
     PROMPT_DIRTRIM=${dirtrim}
