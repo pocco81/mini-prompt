@@ -36,7 +36,7 @@ You can also use it to toggle extensions on and off 'on the fly'!
 
 Args:
 	gt, git							handle the git extension
-	sh, ssh							handle the ssh extension
+	sh, hostname					handle the hostname extension
 	kb, kube, kubernetes			handle the kubernetes extensions
 
 Modifiers for the args:
@@ -64,14 +64,8 @@ function load_defualt_settings() {
     failed="red"
 
     ext_git="false"
-    ext_ssh="false"
+    ext_hostname="false"
     ext_kubernetes="false"
-    git_color="cyan"
-    ssh_color="cyan"
-    kubernetes_color="cyan"
-    git_symbol=""
-    ssh_symbol=""
-    kube_symbol=""
 
 }
 
@@ -156,32 +150,31 @@ function assert_extension() {
     enabled=$2
 
     if [[ "$enabled" == "true" ]]; then
-        bin_cmd="$(command -v ${name})"
-        if [[ ! -z "$bin_cmd" ]]; then
-			unit="[empty_${name}]"
-            case "$name" in
-            "git")
-                if [[ "$($bin_cmd rev-parse --is-inside-work-tree 2>/dev/null)" = 'true' ]]; then
-					unit=$($bin_cmd branch --show-current)
-                fi
-                ;;
-            "ssh")
-					unit="\h"
-                ;;
-            "kube")
-                local context
-                local namespace
-                context="$(${bin_cmd} config view -o=jsonpath='{.current-context}')"
-                namespace="$(${bin_cmd} config view -o=jsonpath="{.contexts[?(@.name==\"${context}\")].context.namespace}")"
-                PS1_content="${PS1_content:-} ${kube_symbol}\[\e[34m\]${context}${namespace:+:$namespace}\[\e[0m\]"
-                ;;
-            esac
+		unit="[empty_${name}]"
+		case "$name" in
+		"git")
+			bin_cmd="$(command -v ${name})"
+			if [[ "$($bin_cmd rev-parse --is-inside-work-tree 2>/dev/null)" = 'true' ]]; then
+				unit=$($bin_cmd branch --show-current)
+			fi
+			;;
+		"hostname")
+				unit="\h"
+			;;
+		"kube")
+			bin_cmd="$(command -v ${name})"
+			local context
+			local namespace
+			context="$(${bin_cmd} config view -o=jsonpath='{.current-context}')"
+			namespace="$(${bin_cmd} config view -o=jsonpath="{.contexts[?(@.name==\"${context}\")].context.namespace}")"
+			PS1_content="${PS1_content:-} ${kube_symbol}\[\e[34m\]${context}${namespace:+:$namespace}\[\e[0m\]"
+			;;
+		esac
 
-			val="${name}_struct"
-			parsed_struct="${!val}"
-			for clr in "${!clrs[@]}"; do parsed_struct=${parsed_struct/"</${clr}>"/"${clrs[$clr]}"}; done
-            PS1_content="${PS1_content:-}${parsed_struct/"</unit>"/"${unit}"}${clrs[$normal_color]}"
-        fi
+		val="${name}_struct"
+		parsed_struct="${!val}"
+		for clr in "${!clrs[@]}"; do parsed_struct=${parsed_struct/"</${clr}>"/"${clrs[$clr]}"}; done
+		PS1_content="${PS1_content:-}${parsed_struct/"</unit>"/"${unit}"}${clrs[$normal_color]}"
     fi
 }
 
@@ -207,8 +200,8 @@ function on_da_fly() {
         var="ext_git"
         export ${var}="$(turn_ext "${task}" "${var}")"
         ;;
-    "sh" | "ssh")
-        var="ext_ssh"
+    "hs" | "hostname")
+        var="ext_hostname"
         export ${var}="$(turn_ext "${task}" "${var}")"
         ;;
     "kp" | "kube" | "kubernetes")
@@ -239,7 +232,7 @@ function make_prompt() {
     PROMPT_DIRTRIM=${dirtrim}
 
     assert_extension "git" "${ext_git}"
-    assert_extension "ssh" "${ext_ssh}"
+    assert_extension "hostname" "${ext_hostname}"
     assert_extension "kubectl" "${ext_kubernetes}"
 
     export PS1="${PS1_prefix:-}${PS1_content:-}${PS1_suffix:-}"
