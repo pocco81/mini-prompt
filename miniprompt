@@ -10,7 +10,7 @@ declare -A clrs=(
     ["spc"]=' '
     ["nc"]='\[\033[0m\]'
 
-	# normal
+    # normal
     ["gray"]='\[\033[0;30m\]'
     ["red"]='\[\033[0;31m\]'
     ["green"]='\[\033[0;32m\]'
@@ -20,7 +20,7 @@ declare -A clrs=(
     ["magenta"]='\[\033[0;35m\]'
     ["white"]='\[\033[0;37m\]'
 
-	# bright
+    # bright
     ["gray_br"]='\[\033[1;30m\]'
     ["red_br"]='\[\033[1;31m\]'
     ["green_br"]='\[\033[1;32m\]'
@@ -30,7 +30,7 @@ declare -A clrs=(
     ["magenta_br"]='\[\033[1;35m\]'
     ["white_br"]='\[\033[1;37m\]'
 
-	# dim
+    # dim
     ["gray_dm"]='\[\033[2;30m\]'
     ["red_dm"]='\[\033[2;31m\]'
     ["green_dm"]='\[\033[2;32m\]'
@@ -40,7 +40,7 @@ declare -A clrs=(
     ["magenta_dm"]='\[\033[2;35m\]'
     ["white_dm"]='\[\033[2;37m\]'
 
-	# italic
+    # italic
     ["gray_it"]='\[\033[3;30m\]'
     ["red_it"]='\[\033[3;31m\]'
     ["green_it"]='\[\033[3;32m\]'
@@ -50,7 +50,7 @@ declare -A clrs=(
     ["magenta_it"]='\[\033[3;35m\]'
     ["white_it"]='\[\033[3;37m\]'
 
-	# underlined
+    # underlined
     ["gray_un"]='\[\033[4;30m\]'
     ["red_un"]='\[\033[4;31m\]'
     ["green_un"]='\[\033[4;32m\]'
@@ -60,7 +60,7 @@ declare -A clrs=(
     ["magenta_un"]='\[\033[4;35m\]'
     ["white_un"]='\[\033[4;37m\]'
 
-	# blinking
+    # blinking
     ["gray_bl"]='\[\033[5;30m\]'
     ["red_bl"]='\[\033[5;31m\]'
     ["green_bl"]='\[\033[5;32m\]'
@@ -70,7 +70,7 @@ declare -A clrs=(
     ["magenta_bl"]='\[\033[5;35m\]'
     ["white_bl"]='\[\033[5;37m\]'
 
-	# reversed
+    # reversed
     ["gray_re"]='\[\033[7;30m\]'
     ["red_re"]='\[\033[7;31m\]'
     ["green_re"]='\[\033[7;32m\]'
@@ -187,7 +187,10 @@ function load_dircolors() {
 function reset_prompt() {
     PS1_previous_exit="$?"
     PS1_prefix="${prefix}" # window title
-    for clr in "${!clrs[@]}"; do ps_content=${ps_content/"</${clr}>"/"${clrs[$clr]}"}; ps_suffix=${ps_suffix/"</${clr}>"/"${clrs[$clr]}"}; done
+    for clr in "${!clrs[@]}"; do
+        ps_content=${ps_content/"</${clr}>"/"${clrs[$clr]}"}
+        ps_suffix=${ps_suffix/"</${clr}>"/"${clrs[$clr]}"}
+    done
     PS1_content="${ps_content}"
     PS1_suffix="${ps_suffix}${clrs[$normal_color]}"
 }
@@ -204,33 +207,33 @@ function assert_extension() {
     enabled=$2
 
     if [[ "$enabled" == "true" ]]; then
-		unit=""
-		case "$name" in
-		"git")
-			bin_cmd="$(command -v ${name})"
-			if [[ "$($bin_cmd rev-parse --is-inside-work-tree 2>/dev/null)" = 'true' ]]; then
-				unit=$($bin_cmd branch --show-current)
-			fi
-			;;
-		"hostname")
-				unit="\h"
-			;;
-		"kube")
-			bin_cmd="$(command -v ${name})"
-			local context
-			local namespace
-			context="$(${bin_cmd} config view -o=jsonpath='{.current-context}')"
-			namespace="$(${bin_cmd} config view -o=jsonpath="{.contexts[?(@.name==\"${context}\")].context.namespace}")"
-			PS1_content="${PS1_content:-} ${kube_symbol}\[\e[34m\]${context}${namespace:+:$namespace}\[\e[0m\]"
-			;;
-		esac
+        unit=""
+        case "$name" in
+        "git")
+            bin_cmd="$(command -v ${name})"
+            if [[ "$($bin_cmd rev-parse --is-inside-work-tree 2>/dev/null)" = 'true' ]]; then
+                unit=$($bin_cmd branch --show-current)
+            fi
+            ;;
+        "hostname")
+            unit="\h"
+            ;;
+        "kube")
+            bin_cmd="$(command -v ${name})"
+            local context
+            local namespace
+            context="$(${bin_cmd} config view -o=jsonpath='{.current-context}')"
+            namespace="$(${bin_cmd} config view -o=jsonpath="{.contexts[?(@.name==\"${context}\")].context.namespace}")"
+            PS1_content="${PS1_content:-} ${kube_symbol}\[\e[34m\]${context}${namespace:+:$namespace}\[\e[0m\]"
+            ;;
+        esac
 
-		if ! [ -z "${unit}" ]; then
-			val="${name}_struct"
-			parsed_struct="${!val}"
-			for clr in "${!clrs[@]}"; do parsed_struct=${parsed_struct/"</${clr}>"/"${clrs[$clr]}"}; done
-			PS1_content="${PS1_content:-}${parsed_struct/"</unit>"/"${unit}"}${clrs[$normal_color]}"
-		fi
+        if ! [ -z "${unit}" ]; then
+            val="${name}_struct"
+            parsed_struct="${!val}"
+            for clr in "${!clrs[@]}"; do parsed_struct=${parsed_struct/"</${clr}>"/"${clrs[$clr]}"}; done
+            PS1_content="${PS1_content:-}${parsed_struct/"</unit>"/"${unit}"}${clrs[$normal_color]}"
+        fi
     fi
 }
 
