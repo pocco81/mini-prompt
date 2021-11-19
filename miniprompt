@@ -4,29 +4,27 @@
 
 # --> metadata
 config="$([ -z "${XDG_CONFIG_HOME}" ] && echo "${HOME}/.config" || echo "${XDG_CONFIG_HOME}")/miniprompt/conf.toml"
-sed_crl_parser='s%</cyan>%\\[\\033[0;36m\\\]%g; s%</yellow>%\\[\\033[0;33m\\\]%g; s%</red_br>%\\[\\033[1;31m\\\]%g; s%</blue_br>%\\[\\033[1;34m\\\]%g; s%</nc>%\\[\\033[0m\\\]%g; s%</white_br>%\\[\\033[1;37m\\\]%g; s%</cyan_br>%\\[\\033[1;36m\\\]%g; s%</gray>%\\[\\033[0;30m\\\]%g; s%</green_br>%\\[\\033[1;32m\\\]%g; s%</yellow_br>%\\[\\033[1;33m\\\]%g; s%</blue>%\\[\\033[0;34m\\\]%g; s%</gray_br>%\\[\\033[1;30m\\\]%g; s%</red>%\\[\\033[0;31m\\\]%g; s%</magenta_br>%\\[\\033[1;35m\\\]%g; s%</white>%\\[\\033[0;37m\\\]%g; s%</green>%\\[\\033[0;32m\\\]%g; s%</magenta>%\\[\\033[0;35m\\\]%g;'
 
 # colors
-# \[\033[0;33m\]		not escaped
-# \\[\\033[0;33m\\\]	properly escaped
 declare -A colors=(
-    ["nc"]='\\[\\033[0m\\\]'
-    ["gray"]='\\[\\033[0;30m\\\]'
-    ["gray_br"]='\\[\\033[1;30m\\\]'
-    ["red"]='\\[\\033[0;31m\\\]'
-    ["red_br"]='\\[\\033[1;31m\\\]'
-    ["green"]='\\[\\033[0;32m\\\]'
-    ["green_br"]='\\[\\033[1;32m\\\]'
-    ["yellow"]='\\[\\033[0;33m\\\]'
-    ["yellow_br"]='\\[\\033[1;33m\\\]'
-    ["magenta"]='\\[\\033[0;35m\\\]'
-    ["magenta_br"]='\\[\\033[1;35m\\\]'
-    ["white"]='\\[\\033[0;37m\\\]'
-    ["white_br"]='\\[\\033[1;37m\\\]'
-    ["blue"]='\\[\\033[0;34m\\\]'
-    ["blue_br"]='\\[\\033[1;34m\\\]'
-    ["cyan"]='\\[\\033[0;36m\\\]'
-    ["cyan_br"]='\\[\\033[1;36m\\\]'
+    ["spc"]=' '
+    ["nc"]='\[\033[0m\]'
+    ["gray"]='\[\033[0;30m\]'
+    ["gray_br"]='\[\033[1;30m\]'
+    ["red"]='\[\033[0;31m\]'
+    ["red_br"]='\[\033[1;31m\]'
+    ["green"]='\[\033[0;32m\]'
+    ["green_br"]='\[\033[1;32m\]'
+    ["yellow"]='\[\033[0;33m\]'
+    ["yellow_br"]='\[\033[1;33m\]'
+    ["magenta"]='\[\033[0;35m\]'
+    ["magenta_br"]='\[\033[1;35m\]'
+    ["white"]='\[\033[0;37m\]'
+    ["white_br"]='\[\033[1;37m\]'
+    ["blue"]='\[\033[0;34m\]'
+    ["blue_br"]='\[\033[1;34m\]'
+    ["cyan"]='\[\033[0;36m\]'
+    ["cyan_br"]='\[\033[1;36m\]'
 )
 
 # help
@@ -51,17 +49,7 @@ Flags:
 EOF
 )
 
-# helpers
-function gen_sed_clr_parser() {
-	X="$(
-		for color in "${!colors[@]}"; do
-			printf "%s " "s%</${color}>%${colors[$color]}%g"\;
-		done
-	)"
-	echo "${X}"
-}
-
-function load_default_settings() {
+function load_defualt_settings() {
 	colored_exit_status="true"
 	dirtrim=2
 	enhanced_autocompletion="true"
@@ -69,7 +57,7 @@ function load_default_settings() {
 	dircolors="true"
 
 	prefix="\[\e]0;\w\a\]"
-	ps_content="</yellow>\w</nc>"
+	ps_content="</yellow>\w</nc></spc>"
 	normal_symbol="➜"
 	error_symbol="✗"
 	succeeded="green"
@@ -88,7 +76,7 @@ function load_default_settings() {
 }
 
 function load_config() {
-	load_default_settings
+	load_defualt_settings
     [[ -f $1 ]] || {
         return 1
     }
@@ -151,14 +139,11 @@ function load_dircolors() {
 function reset_prompt() {
     PS1_previous_exit="$?"
     PS1_prefix="${prefix}" # window title
-    # for color in "${!colors[@]}"; do
-    #     ps_content=${ps_content/"</${color}>"/"${colors[$color]}"}
-    # done
-    # PS1_content="${ps_content}"
-    # PS1_suffix="${colors[$succeeded]}${normal_symbol}\[\033[0m\] "
-	constructed_suffic=" </green>${normal_symbol}</nc> "
-	PS1_content="$(sed "${sed_crl_parser}" <<< ${ps_content})"
-	PS1_suffix="$(sed "${sed_crl_parser}" <<< ${constructed_suffic})"
+    for color in "${!colors[@]}"; do
+        ps_content=${ps_content/"</${color}>"/"${colors[$color]}"}
+    done
+    PS1_content="${ps_content}"
+    PS1_suffix="${colors[$succeeded]}${normal_symbol}\[\033[0m\] "
 }
 
 function clean_variables() {
