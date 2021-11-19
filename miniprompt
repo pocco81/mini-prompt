@@ -204,7 +204,7 @@ function assert_extension() {
     enabled=$2
 
     if [[ "$enabled" == "true" ]]; then
-		unit="[empty_${name}]"
+		unit=""
 		case "$name" in
 		"git")
 			bin_cmd="$(command -v ${name})"
@@ -225,10 +225,12 @@ function assert_extension() {
 			;;
 		esac
 
-		val="${name}_struct"
-		parsed_struct="${!val}"
-		for clr in "${!clrs[@]}"; do parsed_struct=${parsed_struct/"</${clr}>"/"${clrs[$clr]}"}; done
-		PS1_content="${PS1_content:-}${parsed_struct/"</unit>"/"${unit}"}${clrs[$normal_color]}"
+		if ! [ -z "${unit}" ]; then
+			val="${name}_struct"
+			parsed_struct="${!val}"
+			for clr in "${!clrs[@]}"; do parsed_struct=${parsed_struct/"</${clr}>"/"${clrs[$clr]}"}; done
+			PS1_content="${PS1_content:-}${parsed_struct/"</unit>"/"${unit}"}${clrs[$normal_color]}"
+		fi
     fi
 }
 
