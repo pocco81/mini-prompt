@@ -83,8 +83,9 @@ declare -A clrs=(
 
 declare -A final_extensions=(
     ["git"]=''
-    ["hostname"]=''
-	["package"]=''
+    ["ssh"]=''
+    ["package"]=''
+	["kube"]=''
 )
 
 # help
@@ -96,7 +97,7 @@ You can also use it to toggle extensions on and off 'on the fly'!
 
 Args:
 	gt, git							handle the git extension
-	sh, hostname					handle the hostname extension
+	sh, ssh					handle the ssh extension
 	kb, kube, kubernetes			handle the kubernetes extensions
 
 Modifiers for the args:
@@ -122,7 +123,7 @@ function load_defualt_settings() {
     failed="red"
 
     ext_git="false"
-    ext_hostname="false"
+    ext_ssh="false"
     ext_kubernetes="false"
 
 }
@@ -220,13 +221,15 @@ function assert_extension() {
             fi
             ;;
         "package")
-			echo "running"
+            echo "running"
             if [[ -f "package.json" ]]; then # npm
-				unit=$(sed 's/.*"version": "\(.*\)".*/\1/;t;d' ./package.json)
+                unit=$(sed 's/.*"version": "\(.*\)".*/\1/;t;d' ./package.json)
             fi
             ;;
-        "hostname")
-            unit="\h"
+        "ssh")
+            if [[ -n "$SSH_CONNECTION" ]]; then
+				unit="\u@\h"
+            fi
             ;;
         "kube")
             bin_cmd="$(command -v ${name})"
@@ -271,8 +274,8 @@ function on_da_fly() {
         var="ext_git"
         export ${var}="$(turn_ext "${task}" "${var}")"
         ;;
-    "hs" | "hostname")
-        var="ext_hostname"
+    "sh" | "ssh")
+        var="ext_ssh"
         export ${var}="$(turn_ext "${task}" "${var}")"
         ;;
     "pk" | "package")
@@ -296,11 +299,11 @@ function on_da_fly() {
 function pre_prompt() {
     export_ps1_vars
     IFS=', ' read -r -a order <<<"$hierarchy"
-	for name in "${!final_extensions[@]}"; do # append arbitrarily the missing extensions
-		if ! [[ ${order[*]} =~ ${name} ]]; then
-			order[${#order[@]}]="${name}"
-		fi
-	done
+    for name in "${!final_extensions[@]}"; do # append arbitrarily the missing extensions
+        if ! [[ ${order[*]} =~ ${name} ]]; then
+            order[${#order[@]}]="${name}"
+        fi
+    done
     PROMPT_DIRTRIM=${dirtrim}
 }
 
@@ -316,7 +319,7 @@ function append_extensions() {
 
 function assert_extensions() {
     assert_extension "git" "${ext_git}"
-    assert_extension "hostname" "${ext_hostname}"
+    assert_extension "ssh" "${ext_ssh}"
     assert_extension "package" "${ext_package}"
     # assert_extension "kubectl" "${ext_kubernetes}"
 }
