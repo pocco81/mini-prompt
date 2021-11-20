@@ -84,6 +84,7 @@ declare -A clrs=(
 declare -A final_extensions=(
     ["git"]=''
     ["hostname"]=''
+	["package"]=''
 )
 
 # help
@@ -117,9 +118,7 @@ function load_defualt_settings() {
 
     prefix="\[\e]0;\w\a\]"
     ps_content="</yellow>\w</nc></spc>"
-    normal_symbol="➜"
     error_symbol="✗"
-    succeeded="green"
     failed="red"
 
     ext_git="false"
@@ -220,6 +219,12 @@ function assert_extension() {
                 unit=$($bin_cmd branch --show-current)
             fi
             ;;
+        "package")
+			echo "running"
+            if [[ -f "package.json" ]]; then # npm
+				unit=$(sed 's/.*"version": "\(.*\)".*/\1/;t;d' ./package.json)
+            fi
+            ;;
         "hostname")
             unit="\h"
             ;;
@@ -234,12 +239,12 @@ function assert_extension() {
         esac
 
         if ! [ -z "${unit}" ]; then
-			val="${name}_struct"
+            val="${name}_struct"
             parsed_struct="${!val}"
             for clr in "${!clrs[@]}"; do parsed_struct=${parsed_struct/"</${clr}>"/"${clrs[$clr]}"}; done
-			final_extensions[${name}]="${parsed_struct/"</unit>"/"${unit}"}"
-		else
-			final_extensions[${name}]=""
+            final_extensions[${name}]="${parsed_struct/"</unit>"/"${unit}"}"
+        else
+            final_extensions[${name}]=""
         fi
     fi
 }
@@ -270,6 +275,10 @@ function on_da_fly() {
         var="ext_hostname"
         export ${var}="$(turn_ext "${task}" "${var}")"
         ;;
+    "pk" | "package")
+        var="ext_package"
+        export ${var}="$(turn_ext "${task}" "${var}")"
+        ;;
     "kp" | "kube" | "kubernetes")
         var="ext_kubernetes"
         export ${var}="$(turn_ext "${task}" "${var}")"
@@ -286,24 +295,30 @@ function on_da_fly() {
 
 function pre_prompt() {
     export_ps1_vars
-	IFS=', ' read -r -a order <<< "$hierarchy"
+    IFS=', ' read -r -a order <<<"$hierarchy"
+	for name in "${!final_extensions[@]}"; do # append arbitrarily the missing extensions
+		if ! [[ ${order[*]} =~ ${name} ]]; then
+			order[${#order[@]}]="${name}"
+		fi
+	done
     PROMPT_DIRTRIM=${dirtrim}
 }
 
 function append_extensions() {
-	prompt_extensions=""
-	for((i=0;i<${#order[@]};i++)); do
-		if ! [ -z "${final_extensions[${order[$i]}]}" ]; then
-			prompt_extensions="${prompt_extensions}${final_extensions[${order[$i]}]}"
-		fi
-	done
-	PS1_content="${PS1_content:-}${prompt_extensions}${clrs[$normal_color]}"
+    prompt_extensions=""
+    for ((i = 0; i < ${#order[@]}; i++)); do
+        if ! [ -z "${final_extensions[${order[$i]}]}" ]; then
+            prompt_extensions="${prompt_extensions}${final_extensions[${order[$i]}]}"
+        fi
+    done
+    PS1_content="${PS1_content:-}${prompt_extensions}${clrs[$normal_color]}"
 }
 
 function assert_extensions() {
     assert_extension "git" "${ext_git}"
     assert_extension "hostname" "${ext_hostname}"
-    assert_extension "kubectl" "${ext_kubernetes}"
+    assert_extension "package" "${ext_package}"
+    # assert_extension "kubectl" "${ext_kubernetes}"
 }
 
 function make_behaviour() {
@@ -315,9 +330,9 @@ function make_behaviour() {
 function make_prompt() {
     reset_prompt
 
-	make_behaviour
-	assert_extensions
-	append_extensions
+    make_behaviour
+    assert_extensions
+    append_extensions
 
     export PS1="${PS1_prefix:-}${PS1_content:-}${PS1_suffix:-}"
     history -a
