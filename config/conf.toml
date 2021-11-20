@@ -9,7 +9,7 @@ dircolors = true			# color directories
 [primary_prompt]
 prefix = "\[\e]0;\w\a\]"			# prompt prefix
 ps_content = "</yellow>\w</nc> "			# the actual content of your prompt
-ps_suffix = "</green>➜</nc> "	# after the ps_content
+ps_suffix = "</green>➜</nc> "		# after the ps_content
 normal_color = "nc"			# the color text is defaulted to
 error_symbol = "✗"			# symbol to use after the previous command failed
 failed = "red"			# $error_mark's color after the previous command executed successfully
@@ -21,5 +21,5 @@ ext_kubernetes = false			# enable kubernetes extension (shows kubernetes' curren
 ext_package = false			# enable package expansion (shows project's current version)
 git_struct = "</cyan> </unit> "
 ssh_struct = "</magenta> </unit> "
-package_struct = "</cyan> v</unit> "
+package_struct = "</white> v</unit> "
 hierarchy = "ssh, git, package"
