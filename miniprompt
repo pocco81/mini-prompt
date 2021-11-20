@@ -111,21 +111,30 @@ EOF
 )
 
 function load_defualt_settings() {
-    colored_exit_status="true"
-    dirtrim=2
-    enhanced_autocompletion="true"
-    enhanced_history_format="true"
-    dircolors="true"
+	# behaviour
+	colored_exit_status="true"
+	dirtrim=2
+	enhance_utocompletion="true"
+	enhanced_history_format="true"
+	dircolors="true"
 
-    prefix="\[\e]0;\w\a\]"
-    ps_content="</yellow>\w</nc></spc>"
-    error_symbol="✗"
-    failed="red"
+	# primary_prompt
+	prefix="\[\e]0;\w\a\]"
+	ps_content="</yellow>\w</nc> "
+	ps_suffix="</green>➜</nc> "
+	normal_color="nc"
+	error_symbol="✗"
+	failed="red"
 
-    ext_git="false"
-    ext_ssh="false"
-    ext_kubernetes="false"
-
+	# extensions
+	ext_git="false"
+	ext_ssh="false"
+	ext_kubernetes="false"
+	ext_package="false"
+	git_struct="</cyan> </unit> "
+	ssh_struct="</magenta> </unit> "
+	package_struct="</white> v</unit> "
+	hierarchy="ssh, git, package"
 }
 
 function load_config() {
