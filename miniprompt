@@ -86,11 +86,6 @@ declare -A final_extensions=(
     ["hostname"]=''
 )
 
-declare -A order=(
-    [0]='hostname'
-    [1]='git'
-)
-
 # help
 script_help=$(
     cat <<EOF
@@ -289,23 +284,17 @@ function on_da_fly() {
     esac
 }
 
-function pre_prompt() {
-    export_ps1_vars
+function prepare_extensions_hierarchy() {
+	IFS=', ' read -r -a order <<< "$hierarchy"
 }
 
-function make_prompt() {
-    reset_prompt
-
-    if [[ "$colored_exit_status" == "true" ]]; then
-        [ "$PS1_previous_exit" -ne 0 ] && PS1_suffix="${clrs[$failed]}${error_symbol} ${clrs[$normal_color]}"
-    fi
-
+function pre_prompt() {
+    export_ps1_vars
+	prepare_extensions_hierarchy
     PROMPT_DIRTRIM=${dirtrim}
+}
 
-    assert_extension "git" "${ext_git}"
-    assert_extension "hostname" "${ext_hostname}"
-    assert_extension "kubectl" "${ext_kubernetes}"
-
+function append_extensions() {
 	prompt_extensions=""
 	for((i=0;i<${#order[@]};i++)); do
 		if ! [ -z "${final_extensions[${order[$i]}]}" ]; then
@@ -313,6 +302,26 @@ function make_prompt() {
 		fi
 	done
 	PS1_content="${PS1_content:-}${prompt_extensions}${clrs[$normal_color]}"
+}
+
+function assert_extensions() {
+    assert_extension "git" "${ext_git}"
+    assert_extension "hostname" "${ext_hostname}"
+    assert_extension "kubectl" "${ext_kubernetes}"
+}
+
+function make_behaviour() {
+    if [[ "$colored_exit_status" == "true" ]]; then
+        [ "$PS1_previous_exit" -ne 0 ] && PS1_suffix="${clrs[$failed]}${error_symbol} ${clrs[$normal_color]}"
+    fi
+}
+
+function make_prompt() {
+    reset_prompt
+
+	make_behaviour
+	assert_extensions
+	append_extensions
 
     export PS1="${PS1_prefix:-}${PS1_content:-}${PS1_suffix:-}"
     history -a
