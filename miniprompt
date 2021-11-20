@@ -284,13 +284,9 @@ function on_da_fly() {
     esac
 }
 
-function prepare_extensions_hierarchy() {
-	IFS=', ' read -r -a order <<< "$hierarchy"
-}
-
 function pre_prompt() {
     export_ps1_vars
-	prepare_extensions_hierarchy
+	IFS=', ' read -r -a order <<< "$hierarchy"
     PROMPT_DIRTRIM=${dirtrim}
 }
 
