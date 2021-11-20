@@ -17,9 +17,11 @@ failed = "red"			# $error_mark's color after the previous command executed succe
 [extensions]
 ext_git = false			# enable git extension (shows current working branch)
 ext_ssh = false			# enable ssh expansion (shows <user>@<machine>)
-ext_kubernetes = false			# enable kubernetes extension (shows kubernetes' current context)
 ext_package = false			# enable package expansion (shows project's current version)
+ext_kubernetes = false			# enable kubernetes extension (shows kubernetes' current context)
+ext_ip = false			# enable kubernetes extension (shows kubernetes' current context)
 git_struct = "</cyan> </unit> "		# structure of the integration
 ssh_struct = "</magenta> </unit> " # structure of the integration
 package_struct = "</white> v</unit> " # structure of the integration
-hierarchy = "ssh, git, package" # order in which the extensions are displayed
+ip_struct = "</gray_br>  </unit> " # structure of the integration
+hierarchy = "ssh, git, ip, package" # order in which the extensions are displayed

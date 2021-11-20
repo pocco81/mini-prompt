@@ -85,7 +85,8 @@ declare -A final_extensions=(
     ["git"]=''
     ["ssh"]=''
     ["package"]=''
-	["kube"]=''
+    ["ip"]=''
+    ["kube"]=''
 )
 
 # help
@@ -97,7 +98,9 @@ You can also use it to toggle extensions on and off 'on the fly'!
 
 Args:
 	gt, git							handle the git extension
-	sh, ssh					handle the ssh extension
+	sh, ssh							handle the ssh extension
+	pk, package						handle the package extension
+	ip								handle the ip extension
 	kb, kube, kubernetes			handle the kubernetes extensions
 
 Modifiers for the args:
@@ -111,30 +114,30 @@ EOF
 )
 
 function load_defualt_settings() {
-	# behaviour
-	colored_exit_status="true"
-	dirtrim=2
-	enhance_utocompletion="true"
-	enhanced_history_format="true"
-	dircolors="true"
+    # behaviour
+    colored_exit_status="true"
+    dirtrim=2
+    enhance_utocompletion="true"
+    enhanced_history_format="true"
+    dircolors="true"
 
-	# primary_prompt
-	prefix="\[\e]0;\w\a\]"
-	ps_content="</yellow>\w</nc> "
-	ps_suffix="</green>➜</nc> "
-	normal_color="nc"
-	error_symbol="✗"
-	failed="red"
+    # primary_prompt
+    prefix="\[\e]0;\w\a\]"
+    ps_content="</yellow>\w</nc> "
+    ps_suffix="</green>➜</nc> "
+    normal_color="nc"
+    error_symbol="✗"
+    failed="red"
 
-	# extensions
-	ext_git="false"
-	ext_ssh="false"
-	ext_kubernetes="false"
-	ext_package="false"
-	git_struct="</cyan> </unit> "
-	ssh_struct="</magenta> </unit> "
-	package_struct="</white> v</unit> "
-	hierarchy="ssh, git, package"
+    # extensions
+    ext_git="false"
+    ext_ssh="false"
+    ext_kubernetes="false"
+    ext_package="false"
+    git_struct="</cyan> </unit> "
+    ssh_struct="</magenta> </unit> "
+    package_struct="</white> v</unit> "
+    hierarchy="ssh, git, package"
 }
 
 function load_config() {
@@ -237,7 +240,13 @@ function assert_extension() {
             ;;
         "ssh")
             if [[ -n "$SSH_CONNECTION" ]]; then
-				unit="\u@\h"
+                unit="\u@\h"
+            fi
+            ;;
+        "ip")
+            IFACE=$(ip -4 route | grep default | head -n1 | awk '{print $5}')
+            if [ ! -z "${IFACE}" ]; then
+				unit=$(ip -4 -o addr show scope global "${IFACE}" | awk '{gsub(/\/.*/, "",$4); print $4}' | paste -s -d "")
             fi
             ;;
         "kube")
@@ -291,6 +300,10 @@ function on_da_fly() {
         var="ext_package"
         export ${var}="$(turn_ext "${task}" "${var}")"
         ;;
+    "ip")
+        var="ext_ip"
+        export ${var}="$(turn_ext "${task}" "${var}")"
+        ;;
     "kp" | "kube" | "kubernetes")
         var="ext_kubernetes"
         export ${var}="$(turn_ext "${task}" "${var}")"
@@ -330,6 +343,7 @@ function assert_extensions() {
     assert_extension "git" "${ext_git}"
     assert_extension "ssh" "${ext_ssh}"
     assert_extension "package" "${ext_package}"
+    assert_extension "ip" "${ext_ip}"
     # assert_extension "kubectl" "${ext_kubernetes}"
 }
 
