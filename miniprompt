@@ -81,6 +81,16 @@ declare -A clrs=(
     ["white_re"]='\[\033[7;37m\]'
 )
 
+declare -A final_extensions=(
+    ["git"]=''
+    ["hostname"]=''
+)
+
+declare -A order=(
+    [0]='hostname'
+    [1]='git'
+)
+
 # help
 script_help=$(
     cat <<EOF
@@ -229,10 +239,12 @@ function assert_extension() {
         esac
 
         if ! [ -z "${unit}" ]; then
-            val="${name}_struct"
+			val="${name}_struct"
             parsed_struct="${!val}"
             for clr in "${!clrs[@]}"; do parsed_struct=${parsed_struct/"</${clr}>"/"${clrs[$clr]}"}; done
-            PS1_content="${PS1_content:-}${parsed_struct/"</unit>"/"${unit}"}${clrs[$normal_color]}"
+			final_extensions[${name}]="${parsed_struct/"</unit>"/"${unit}"}"
+		else
+			final_extensions[${name}]=""
         fi
     fi
 }
@@ -293,6 +305,14 @@ function make_prompt() {
     assert_extension "git" "${ext_git}"
     assert_extension "hostname" "${ext_hostname}"
     assert_extension "kubectl" "${ext_kubernetes}"
+
+	prompt_extensions=""
+	for((i=0;i<${#order[@]};i++)); do
+		if ! [ -z "${final_extensions[${order[$i]}]}" ]; then
+			prompt_extensions="${prompt_extensions}${final_extensions[${order[$i]}]}"
+		fi
+	done
+	PS1_content="${PS1_content:-}${prompt_extensions}${clrs[$normal_color]}"
 
     export PS1="${PS1_prefix:-}${PS1_content:-}${PS1_suffix:-}"
     history -a
