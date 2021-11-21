@@ -12,10 +12,10 @@ LOG_SUCCESS=$(shell date +"%H:%M:%S") \e[0;32mSUCCESS\e[0m
 INSTALLATION_MEDIUM=any
 
 install:
-	@./scripts/install.sh $(CURDIR) $(PREFIX) $(INSTALLATION_MEDIUM) $(BASHRC) $(CONFIG_DIR)
+	@./scripts/install.sh $(CURDIR) $(PREFIX)
 
 uninstall:
-	@./scripts/uninstall.sh $(PREFIX) $(INSTALLATION_MEDIUM)
+	@./scripts/uninstall.sh $(PREFIX)
 
 run:
 	@echo -e "$(LOG_INFO) Running MiniPrompt...\n"

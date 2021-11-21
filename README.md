@@ -48,12 +48,16 @@ $ npm install --global miniprompt
 
 #### Manual
 
-```
+```sh
 $ git clone git@github.com:Pocco81/MiniPrompt.git && cd MiniPrompt
 $ make install
 ```
 
-> Installs the prompt under your local bins (`~/.local/bin`), copies the default config file and sets things up in your `~/.bashrc`
+> Installs the prompt under your local bins: `~/.local/bin`. Make sure this directory is in your `$PATH`; if it's not, paste this into your `~/.bashrc`:
+
+```sh
+export PATH=$PATH:"$HOME/.local/bin"
+```
 
 #### AUR
 
