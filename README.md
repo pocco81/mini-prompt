@@ -53,7 +53,7 @@ $ git clone git@github.com:Pocco81/MiniPrompt.git && cd MiniPrompt
 $ make install
 ```
 
-> Installs under your local bins, copies the default config file and sets things up in your `~/.bashrc`
+> Installs the prompt under your local bins (`~/.local/bin`), copies the default config file and sets things up in your `~/.bashrc`
 
 #### AUR
 

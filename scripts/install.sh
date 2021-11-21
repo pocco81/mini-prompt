@@ -15,6 +15,7 @@ echo -e "${LOG_INFO} Preparing..."
 
 mkdir -p "${CONFIG_DIR}"
 if [[ ! "${INSTALLATION_MEDIUM}" == "npm" ]]; then
+	mkdir -p "${PREFIX}"
 	install "${CURDIR}/miniprompt" "${PREFIX}/miniprompt"
 else
 	PREFIX="${CURDIR}"
