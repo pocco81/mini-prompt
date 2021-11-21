@@ -65,7 +65,19 @@ export PATH=$PATH:"$HOME/.local/bin"
 
 ### 🔧 Setup
 
-MiniPrompt can be configured from a `conf.toml` file located under `${XDG_CONFIG_HOME}/miniprompt/conf.toml` (note: if the `$XDG_CONFIG_HOME` env var is not set then it'll be assumed to be `$HOME/.config/`). If the file does not exist the settings will be assumed.
+Two things to keep in to do:
+
+1. Enabling the prompt in your `~/.bashrc`
+2. Configuring it
+
+To enable the prompt paste this into your `~/.bashrc`:
+
+```sh
+alias mp="source miniprompt"
+mp
+```
+
+After that, feel free to customize the prompt to your like using the `conf.toml` file (located under `${XDG_CONFIG_HOME}/miniprompt/conf.toml`. If the `$XDG_CONFIG_HOME` env var is not set then it'll be assumed to be `$HOME/.config/`).
 
 Here is the [default config](https://github.com/Pocco81/MiniPrompt/blob/main/config/conf.toml):
 
@@ -80,38 +92,32 @@ dircolors = true			# color directories
 
 [primary_prompt]
 prefix = "\[\e]0;\w\a\]"			# prompt prefix
-ps_content = "</yellow>\w</nc></spc>"			# the actual content of your prompt
-normal_symbol = "➜"			# symbol to use after the previous command succeeded
+ps_content = "</yellow>\w</nc> "			# the actual content of your prompt
+ps_suffix = "</green>➜</nc> "		# after the ps_content
+normal_color = "nc"			# the color text is defaulted to
 error_symbol = "✗"			# symbol to use after the previous command failed
-succeeded = "green"			# $normal_mark's color after a command executed successfully
 failed = "red"			# $error_mark's color after the previous command executed successfully
 
 [extensions]
 ext_git = false			# enable git extension (shows current working branch)
-ext_ssh = false			# enable ssh expansion (shows an @<machine> in the prompt)
+ext_ssh = false			# enable ssh expansion (shows <user>@<machine>)
+ext_package = false			# enable package expansion (shows project's current version)
 ext_kubernetes = false			# enable kubernetes extension (shows kubernetes' current context)
-git_color = "cyan"			# color of the git extension
-ssh_color = "cyan"			# color of the ssh extension
-kubernetes_color = "cyan"			# color of the kubernetes extennsion
-git_symbol = ""			# symbol to use for the git extension
-ssh_symbol = ""			# symbol to use for the ssh extension
-kube_symbol = ""			# symbol to use for the kubernetes extension
+ext_ip = false			# enable kubernetes extension (shows kubernetes' current context)
+ext_wifi = false
+git_struct = "</cyan> </unit> "		# structure of the integration
+ssh_struct = "</magenta> </unit> " # structure of the integration
+package_struct = "</white> v</unit> " # structure of the integration
+ip_struct = "</gray_br>  </unit> " # structure of the integration
+wifi_struct = "</blue>直 </unit> " # structure of the integration
+hierarchy = "ssh, git, ip, wifi, package" # order in which the extensions are displayed
 ```
 
 ### 🌿 Utilization
 
-#### Prompt
-
-To enable the prompt paste the following under your Bash rc (`$HOME/.bashrc`):
-
-```sh
-source /usr/local/bin/miniprompt
-alias mp="source /usr/local/bin/miniprompt"
-```
-
 #### On the fly commands
 
-On the previous step we created the alias `mp`, which we will be using to run commands for MiniPrompt. Use `mp --help` to see the available commands. Here is a quick example enabling the Git integration:
+On the previous step we created the alias `mp`, which we will be using to run commands for MiniPrompt. Use `mp --help` to see the available commands. Here is a quick example enabling the Git extension:
 
 ```sh
 $ mp git enable
