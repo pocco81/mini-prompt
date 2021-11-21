@@ -11,8 +11,6 @@
     <a href="https://github.com/Pocco81/MiniPrompt/network/members"><img src="https://img.shields.io/github/forks/Pocco81/MiniPrompt?colorA=2c2837&colorB=ecbfbd&style=for-the-badge&logo=github"></a>
 </p>
 
-
-
 ## About
 
 <div style="text-align: justify">
@@ -34,6 +32,7 @@ MiniPrompt is a minimal Bash prompt that aims to be as lightweight as possible w
     -   SSH
     -   IP address
     -   WIFI
+    -   Package versions
 -   Extensions can be toggled on and off on the fly
 
 ## 🤖 Usage
@@ -130,17 +129,20 @@ hierarchy = "ssh, git, ip, wifi, package" # order in which the extensions are di
 ##### Showcase
 
 ![image](https://user-images.githubusercontent.com/58336662/142748343-c38a4b4b-82e7-4f95-a8c3-5bddda66fe5a.png)
+
 ```
 ps_content = "</yellow_it>\w </blue_re> \@ \n</magenta> \u</nc> "
 ```
 
 ![image](https://user-images.githubusercontent.com/58336662/142749510-735b7e06-6495-409c-97e8-b97c14fdc20d.png)
+
 ```
 ps_content = "</magenta></magenta_re>\A </cyan_re> \w</cyan></nc> "
 ps_suffix = "</blue></nc> "		# after the ps_content
 ```
 
 ![image](https://user-images.githubusercontent.com/58336662/142773041-24c0ecc1-f757-4cfa-941f-f5f355429379.png)
+
 ```sh
 [primary_prompt]
 ps_content = "</yellow>\w</nc> "			# the actual content of your prompt
@@ -246,7 +248,7 @@ $ mp
 #### Dependencies for extensions
 
 | Extension | Dependencies |
-|-----------|--------------|
+| --------- | ------------ |
 | Git       | `git`        |
 | SSH       | `openssh`    |
 | Package   | `npm`        |
