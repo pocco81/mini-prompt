@@ -125,6 +125,30 @@ hierarchy = "ssh, git, ip, wifi, package" # order in which the extensions are di
 
 #### Customizing!
 
+##### Showcase
+
+![image](https://user-images.githubusercontent.com/58336662/142748343-c38a4b4b-82e7-4f95-a8c3-5bddda66fe5a.png)
+```
+ps_content = "</yellow_it>\w </blue_re> \@ \n</magenta> \u</nc> "
+```
+
+![image](https://user-images.githubusercontent.com/58336662/142749510-735b7e06-6495-409c-97e8-b97c14fdc20d.png)
+```
+ps_content = "</magenta></magenta_re>\A </cyan_re> \w</cyan></nc> "
+ps_suffix = "</blue></nc> "		# after the ps_content
+```
+
+![image](https://user-images.githubusercontent.com/58336662/142773041-24c0ecc1-f757-4cfa-941f-f5f355429379.png)
+```sh
+[primary_prompt]
+ps_content = "</yellow>\w</nc> "			# the actual content of your prompt
+ps_suffix = "\n</green>➜</nc> "		# after the ps_content
+
+[extensions]
+git_struct = "</cyan></cyan_re> </unit></cyan> "		# structure of the integration
+package_struct = "</white></white_re> v</unit></white> " # structure of the integration
+```
+
 ##### Prompt
 
 The prompt itself can be changed modifying the `ps_content` and `ps_suffix` variables. Apart from giving your prompt different colors using the [tags](#tags), you can also modify the information displayed using the following built-in Bash options:
