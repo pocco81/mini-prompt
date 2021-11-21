@@ -59,8 +59,9 @@ export PATH=$PATH:"$HOME/.local/bin"
 
 #### AUR
 
+```sh
 👷🛑 Under dev
-
+```
 ### 🔧 Setup
 
 Two things to keep in to do:
