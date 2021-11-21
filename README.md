@@ -7,7 +7,7 @@
 <p align="center">
     <a href="https://github.com/Pocco81/MiniPrompt/stargazers"><img src="https://img.shields.io/github/stars/Pocco81/MiniPrompt?colorA=2c2837&colorB=b9c4e3&style=for-the-badge&logo=starship style=flat-square"></a>
 	<a href="https://github.com/Pocco81/MiniPrompt/releases/latest"><img src="https://img.shields.io/github/v/release/Pocco81/MiniPrompt?style=for-the-badge&label=Release&logo=github&logoColor=eceff4&colorA=2c2837&colorB=e9a3da"/></a>
-    <a href="https://github.com/Pocco81/MiniPrompt/issues"><img src="https://img.shields.io/github/issues/Pocco81/MiniPrompt?colorA=2c2837&colorB=e7a988&style=for-the-badge"></a>
+    <a href="https://github.com/Pocco81/MiniPrompt/issues"><img src="https://img.shields.io/github/issues/Pocco81/MiniPrompt?colorA=2c2837&colorB=f6c29c&style=for-the-badge"></a>
     <a href="https://github.com/Pocco81/MiniPrompt/network/members"><img src="https://img.shields.io/github/forks/Pocco81/MiniPrompt?colorA=2c2837&colorB=ecbfbd&style=for-the-badge&logo=github"></a>
 </p>
 
