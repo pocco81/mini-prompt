@@ -167,7 +167,7 @@ This will display:
  dev
 ```
 
-Because `</unit>` in this case, displays the current working branch.
+Because `</unit>`, in this case, displays the current working branch.
 
 ##### Tags
 
