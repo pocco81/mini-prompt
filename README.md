@@ -64,10 +64,10 @@ export PATH=$PATH:"$HOME/.local/bin"
 ```
 ### 🔧 Setup
 
-Two things to keep in to do:
+Two things:
 
-1. Enabling the prompt in your `~/.bashrc`
-2. Configuring it
+1. Enable the prompt in your `~/.bashrc`
+2. Configure it
 
 To enable the prompt paste this into your `~/.bashrc`:
 
