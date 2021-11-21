@@ -1,11 +1,11 @@
 {
     "name": "miniprompt.sh",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Minimal and versatile bash prompt",
     "main": "miniprompt",
-	"bin": {
-		"miniprompt": "./miniprompt"
-	},
+    "bin": {
+        "miniprompt": "./miniprompt"
+    },
     "scripts": {
         "install": "make install INSTALLATION_MEDIUM=npm",
         "test": "echo \"Error: no test specified\" && exit 1"
