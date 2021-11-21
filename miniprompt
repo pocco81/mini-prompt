@@ -211,8 +211,8 @@ function reset_prompt() {
     PS1_previous_exit="$?"
     PS1_prefix="${prefix}" # window title
     for clr in "${!clrs[@]}"; do
-        ps_content=${ps_content/"</${clr}>"/"${clrs[$clr]}"}
-        ps_suffix=${ps_suffix/"</${clr}>"/"${clrs[$clr]}"}
+        ps_content=${ps_content//"</${clr}>"/"${clrs[$clr]}"}
+        ps_suffix=${ps_suffix//"</${clr}>"/"${clrs[$clr]}"}
     done
     PS1_content="${ps_content}"
     PS1_suffix="${ps_suffix}${clrs[$normal_color]}"
@@ -270,8 +270,8 @@ function assert_extension() {
         if ! [ -z "${unit}" ]; then
             val="${name}_struct"
             parsed_struct="${!val}"
-            for clr in "${!clrs[@]}"; do parsed_struct=${parsed_struct/"</${clr}>"/"${clrs[$clr]}"}; done
-            final_extensions[${name}]="${parsed_struct/"</unit>"/"${unit}"}"
+            for clr in "${!clrs[@]}"; do parsed_struct=${parsed_struct//"</${clr}>"/"${clrs[$clr]}"}; done
+            final_extensions[${name}]="${parsed_struct//"</unit>"/"${unit}"}"
         else
             final_extensions[${name}]=""
         fi
