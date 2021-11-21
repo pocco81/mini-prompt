@@ -43,6 +43,7 @@ Make sure you have the following programs installed in your system:
 -   GNU Make
 -   `git`
 -   `npm` (for the npm installer)
+-   General utilities like `grep`, `sed`, `awk`, ...
 -   A patched [Nerd Font](https://www.nerdfonts.com/) (optional)
 
 #### NPM
@@ -205,6 +206,16 @@ On the previous step we created the alias `mp`, which we will be using to run co
 $ mp git enable
 # you can shorten it as: mp gt e
 ```
+
+#### Dependencies for extensions
+
+| Extension | Dependencies |
+|-----------|--------------|
+| Git       | `git`        |
+| SSH       | `openssh`    |
+| Package   | `npm`        |
+| Wifi      | `nmcli`      |
+| IP        | `ip`         |
 
 ## 🙋 FAQ
 
