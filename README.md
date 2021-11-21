@@ -38,6 +38,12 @@ MiniPrompt is a minimal Bash prompt that aims to be as lightweight as possible w
 
 ### 📦 Installation
 
+Make sure you have the following programs installed in your system:
+
++ GNU Make
++ `git`
++ `npm` (for the npm installer)
+
 #### NPM
 
 ```
