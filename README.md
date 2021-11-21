@@ -132,7 +132,7 @@ $ mp git enable
 -   Q: **_"Why does the alias created for the prompt needs to be sourced?"_**
 -   A: Because you can't export env vars from a shell script unless it's sourced, so [this](https://stackoverflow.com/questions/16618071/can-i-export-a-variable-to-the-environment-from-a-bash-script-without-sourcing-i) is the best solution.
 
-# 📜 License
+## 📜 License
 
 MiniPrompt is released under the GPL v3.0 license. It grants open-source permissions for users including:
 
