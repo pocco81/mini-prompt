@@ -239,7 +239,6 @@ function assert_extension() {
             fi
             ;;
         "package")
-            echo "running"
             if [[ -f "package.json" ]]; then # npm
                 unit=$(sed 's/.*"version": "\(.*\)".*/\1/;t;d' ./package.json)
             fi
