@@ -18,20 +18,21 @@ MiniPrompt is a minimal Bash prompt that aims to be as lightweight as possible w
 </div>
 
 ## 🎁 Features
-- Colored exit status
-- Easily configurable
-- Fully customizable: colors, symbols, the prompt itself, and more...
-- Better history
-- Better completion
-- Directory colors support
-- Trimming path
-- Various extensions
-	- Git
-	- Kubernetes
-	- SSH
-	- IP address
-	- WIFI
-- Extensions can be toggled on and off on the fly
+
+-   Colored exit status
+-   Easily configurable
+-   Fully customizable: colors, symbols, the prompt itself, and more...
+-   Better history
+-   Better completion
+-   Directory colors support
+-   Trimming path
+-   Various extensions
+    -   Git
+    -   Kubernetes
+    -   SSH
+    -   IP address
+    -   WIFI
+-   Extensions can be toggled on and off on the fly
 
 ## 🤖 Usage
 
@@ -110,6 +111,81 @@ wifi_struct = "</blue>直 </unit> " # structure of the integration
 hierarchy = "ssh, git, ip, wifi, package" # order in which the extensions are displayed
 ```
 
+#### Customizing!
+
+##### Prompt
+
+The prompt itself can be changed changing the `ps_content` and `ps_suffix` variables. Apart from given your prompt different colors using the tags, you can also modify the information displayed using the following built-in Bash options:
+
+| Opts         | Description                                             |
+| ------------ | ------------------------------------------------------- |
+| `\a`         | A bell character                                        |
+| `\d`         | Date (day/month/date)                                   |
+| `\D{format}` | Date but following the system's time format             |
+| `\e`         | Escape character                                        |
+| `\h`         | Hostname (short)                                        |
+| `\H`         | Full hostname (domain name)                             |
+| `\j`         | Number of jobs being managed by the shell               |
+| `\l`         | The basename of the shells terminal device              |
+| `\n`         | New line                                                |
+| `\r`         | Carriage return                                         |
+| `\s`         | The name of the shell                                   |
+| `\t`         | Time (hour:minute:second)                               |
+| `\@`         | Time, 12-hour AM/PM                                     |
+| `\A`         | Time, 24-hour, without seconds                          |
+| `\u`         | Current username                                        |
+| `\v`         | BASH version                                            |
+| `\V`         | Extra information about the BASH version                |
+| `\w`         | Current working directory                               |
+| `\W`         | The basename of the working directory                   |
+| `\!`         | Lists this command’s number in the history              |
+| `\#`         | This command’s command number                           |
+| `\$`         | Specifies whether the user is root (#) or otherwise ($) |
+| `\\`         | Backslash                                               |
+| `\[`         | Start a sequence of non-displayed characters            |
+| `\]`         | Close or end a sequence of non-displayed characters     |
+
+##### Structs
+
+Structs define the structure of the extensions. You can use tags to customize the structs further. However, there is an additional tag called `</unit>`, which is the output of the extension. Say you are using the git extension:
+
+```sh
+git_struct = "</cyan> </unit> "
+```
+
+This will display:
+
+```sh
+ dev
+```
+
+Because `</unit>` in this case, displays the current working branch.
+
+##### Tags
+
+| Tag          | Description                            |
+| ------------ | -------------------------------------- |
+| `</gray>`    | Makes text following it gray           |
+| `</red>`     | Makes text following it red            |
+| `</green>`   | Makes text following it green          |
+| `</blue>`    | Makes text following it blue           |
+| `</cyan>`    | Makes text following it cyan           |
+| `</yellow>`  | Makes text following it yellow         |
+| `</magenta>` | Makes text following it magenta        |
+| `</white>`   | Makes text following it white          |
+| `</nc>`      | Removes the color of text following it |
+
+You can also give some properties to the colors by using modifiers and appending them at the end of the color (e.g. `<green_br>`):
+
+| Modifier | Description |
+| -------- | ----------- |
+| `_br`    | bright      |
+| `_dm`    | dim         |
+| `_it`    | italic      |
+| `_un`    | underlined  |
+| `_bl`    | blinking    |
+| `_re`    | inverted    |
+
 ### 🌿 Utilization
 
 #### On the fly commands
@@ -145,7 +221,7 @@ For more convoluted language, see the [LICENSE file](https://github.com/Pocco81/
 **High Priority:**
 
 -   Publish to NPM
-- Publish AUR
+-   Publish AUR
 
 **Low Priority:**
 
