@@ -29,6 +29,8 @@ MiniPrompt is a minimal Bash prompt that aims to be as lightweight as possible w
 	- Git
 	- Kubernetes
 	- SSH
+	- IP address
+	- WIFI
 - Extensions can be toggled on and off on the fly
 
 ## 🤖 Usage
@@ -37,15 +39,25 @@ MiniPrompt is a minimal Bash prompt that aims to be as lightweight as possible w
 
 #### NPM
 
-under dev
+```
+$ npm install --global miniprompt
+```
 
-#### AUR
+> Installs the prompt under your node modules, copies the default config file and sets things up in your `~/.bashrc`
 
-under dev
 
 #### Manual
 
-Copy [the prompt](https://github.com/Pocco81/MiniPrompt/blob/main/miniprompt) under `/usr/local/bin/` and give it execution permission.
+```
+$ git clone git@github.com:Pocco81/MiniPrompt.git && cd MiniPrompt
+$ make install
+```
+
+> Installs under your local bins, copies the default config file and sets things up in your `~/.bashrc`
+
+#### AUR
+
+👷🛑 Under dev
 
 ### 🔧 Setup
 
