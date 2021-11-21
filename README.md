@@ -209,6 +209,14 @@ $ mp git enable
 # you can shorten it as: mp gt e
 ```
 
+#### Reloading the prompt
+
+After changing the config file you can reload the prompt using the same alias, but without any flags:
+
+```sh
+$ mp
+```
+
 #### Dependencies for extensions
 
 | Extension | Dependencies |
