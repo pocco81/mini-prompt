@@ -43,6 +43,7 @@ Make sure you have the following programs installed in your system:
 + GNU Make
 + `git`
 + `npm` (for the npm installer)
++ A patched [Nerd Font](https://www.nerdfonts.com/) (optional)
 
 #### NPM
 
