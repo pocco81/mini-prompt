@@ -40,10 +40,10 @@ MiniPrompt is a minimal Bash prompt that aims to be as lightweight as possible w
 
 Make sure you have the following programs installed in your system:
 
-+ GNU Make
-+ `git`
-+ `npm` (for the npm installer)
-+ A patched [Nerd Font](https://www.nerdfonts.com/) (optional)
+-   GNU Make
+-   `git`
+-   `npm` (for the npm installer)
+-   A patched [Nerd Font](https://www.nerdfonts.com/) (optional)
 
 #### NPM
 
@@ -69,6 +69,7 @@ export PATH=$PATH:"$HOME/.local/bin"
 ```sh
 👷🛑 Under dev
 ```
+
 ### 🔧 Setup
 
 Two things:
@@ -228,12 +229,11 @@ For more convoluted language, see the [LICENSE file](https://github.com/Pocco81/
 
 **High Priority:**
 
--   Publish to NPM
--   Publish AUR
+-   Publish to the AUR?
 
 **Low Priority:**
 
--   Finish README
+-   None
 
 <hr>
 <p align="center">
