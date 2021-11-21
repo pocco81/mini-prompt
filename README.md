@@ -52,6 +52,8 @@ Make sure you have the following programs installed in your system:
 $ npm install --global miniprompt.sh
 ```
 
+> If it throws an error then run the command with `sudo`
+
 #### Manual
 
 ```sh
