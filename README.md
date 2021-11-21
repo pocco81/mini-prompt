@@ -116,7 +116,7 @@ hierarchy = "ssh, git, ip, wifi, package" # order in which the extensions are di
 
 ##### Prompt
 
-The prompt itself can be changed changing the `ps_content` and `ps_suffix` variables. Apart from given your prompt different colors using the tags, you can also modify the information displayed using the following built-in Bash options:
+The prompt itself can be changed modifying the `ps_content` and `ps_suffix` variables. Apart from giving your prompt different colors using the [tags](#tags), you can also modify the information displayed using the following built-in Bash options:
 
 | Opts         | Description                                             |
 | ------------ | ------------------------------------------------------- |
