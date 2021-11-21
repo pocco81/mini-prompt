@@ -40,7 +40,7 @@ MiniPrompt is a minimal Bash prompt that aims to be as lightweight as possible w
 #### NPM
 
 ```
-$ npm install --global miniprompt
+$ npm install --global miniprompt.sh
 ```
 
 > Installs the prompt under your node modules, copies the default config file and sets things up in your `~/.bashrc`

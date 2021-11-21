@@ -1,5 +1,5 @@
 {
-    "name": "miniprompt",
+    "name": "miniprompt.sh",
     "version": "0.1.0",
     "description": "Minimal and versatile bash prompt",
     "main": "miniprompt",
