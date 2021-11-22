@@ -1,0 +1,44 @@
+# Maintainer: Pocco81
+# Contributor: Deckweiss <Deckweiss75@gmail.com>
+
+_project_name="MiniPrompt"
+_name="miniprompt"
+pkgname="${_name}-git"
+pkgver=0.1.2
+pkgrel=1
+pkgdesc="A minimal Bash prompt that aims to be as lightweight as possible while still being feature rich and user friendly enough to appeal to most users."
+arch=('any')
+url="https://github.com/Pocco81/${_project_name}"
+license=('GPL3')
+depends=('bash')
+makedepends=('make' 'git')
+optdepends=(    'git: for the Git extension'
+                'openssh: for the SSH extension'
+                'npm: for the Package extension'
+                'nmcli: for the Wifi extension'
+                'ip: for the IP extension')
+conflicts=(${_name})
+provides=(${_name})
+source=("git+https://github.com/Pocco81/$_project_name.git")
+sha256sums=('SKIP')
+
+pkgver() {
+    cd "$_project_name"
+    git describe --tags | sed "s/\-.*//;s/v//"
+}
+
+package() {
+    cd "$_project_name"
+
+    # installs the miniprompt script to /usr/bin
+    install -D -t "$pkgdir/usr/bin" "miniprompt"
+
+    # installs the miniprompt config either to XDG_CONFIG_HOME/miniprompt or to $HOME/.config/miniprompt
+    if [ -z "$XDG_CONFIG_HOME" ]; then
+        _config_dir="$pkgdir/$HOME/.config/${_name}"
+    else
+        _config_dir="$pkgdir/$XDG_CONFIG_HOME/${_name}"
+    fi
+    install -D -t "$_config_dir" "config/conf.toml"
+}
+
